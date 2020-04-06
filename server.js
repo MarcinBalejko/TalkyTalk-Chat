@@ -14,7 +14,21 @@ app.use(express.static(path.join(__dirname, "public")));
 io.on("connection", (socket) => {
   console.log("New Websocket Connection");
 
+  // Welcome current user
   socket.emit("message", "Welcome to TalkyTalk!");
+
+  // Broadcast when a user connects
+  socket.broadcast.emit("message", "A user has joined the chat");
+
+  // Runs when client disconnects
+  socket.on("disconnect", () => {
+    io.emit("message", "A user has left the chat");
+  });
+
+  // Listen for chat message
+  socket.on("chatMessage", (msg) => {
+    console.log(msg);
+  });
 });
 
 const PORT = process.env.PORT || 3000;
