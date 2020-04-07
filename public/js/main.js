@@ -10,10 +10,6 @@ socket.on("message", (message) => {
 
   // Scroll down
   chatMessages.scrollTop = chatMessages.scrollHeight;
-
-  // Clear input
-  e.target.elements.msg.value = "";
-  e.target.elements.msg.focus();
 });
 
 // Message submit
@@ -25,6 +21,10 @@ chatForm.addEventListener("submit", (e) => {
 
   // Emit message to server
   socket.emit("chatMessage", msg);
+
+  // Clear input
+  e.target.elements.msg.value = "";
+  e.target.elements.msg.focus();
 });
 
 // Output message to DOM
