@@ -1,9 +1,17 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
-:root {
+/* :root {
   --dark-color-a: #667aff;
   --dark-color-b: #7386ff;
   --light-color: #e6e9ff;
+  --success-color: #5cb85c;
+  --error-color: #d9534f;
+} */
+
+:root {
+  --dark-color-a: #73c0f4;
+  --dark-color-b: #728ca3;
+  --light-color: #e6eff3;
   --success-color: #5cb85c;
   --error-color: #d9534f;
 }
@@ -89,13 +97,15 @@ a {
   padding: 30px;
   max-height: 500px;
   overflow-y: scroll;
+  background-color: #fdfdfd;
 }
 
 .chat-messages .message {
   padding: 10px;
   margin-bottom: 15px;
-  background-color: var(--light-color);
-  border-radius: 5px;
+  background-color: #f3e4c6;
+  border-radius: 25px;
+  border-top-left-radius: 0;
 }
 
 .chat-messages .message .meta {
@@ -110,9 +120,15 @@ a {
   color: #777;
 }
 
+.msg-text {
+  color: #8f4f06;
+}
+
 .chat-form-container {
   padding: 20px 30px;
   background-color: var(--dark-color-a);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .chat-form-container form {
@@ -144,6 +160,8 @@ a {
 .join-main {
   padding: 30px 40px;
   background: var(--dark-color-b);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .join-main p {
