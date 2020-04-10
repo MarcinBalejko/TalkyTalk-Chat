@@ -68,13 +68,13 @@ io.on("connection", (socket) => {
         formatMessage(botName, `${user.username} ${disconMsg}`)
       );
 
+      disconMsg = "";
+
       // Send users and room info
       io.to(user.room).emit("roomUsers", {
         room: user.room,
         users: getRoomUsers(user.room),
       });
-
-      disconMsg = "";
     }
   });
 });
