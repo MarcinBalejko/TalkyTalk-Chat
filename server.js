@@ -3,7 +3,11 @@ const http = require("http");
 const express = require("express");
 const socketio = require("socket.io");
 const formatMessage = require("./utils/messages");
-const chooseGreeting = require("./utils/notifications");
+const {
+  chooseGreeting,
+  chooseJoinMsg,
+  chooseDisconMsg,
+} = require("./utils/notifications");
 const {
   userJoin,
   getCurrentUser,
@@ -29,37 +33,7 @@ io.on("connection", (socket) => {
 
     let greeting = chooseGreeting(user.room);
 
-    // switch (user.room) {
-    //   case "English":
-    //     greeting = "Welcome to TalkyTalk!";
-    //     break;
-    //   case "Polish":
-    //     greeting = "Witamy w TalkyTalk!";
-    //     break;
-    //   case "Russian":
-    //     greeting = "Добро пожаловать в TalkyTalk!";
-    //     break;
-    //   case "German":
-    //     greeting = "Willkommen bei TalkyTalk!";
-    //     break;
-    //   case "French":
-    //     greeting = "Bienvenue sur TalkyTalk!";
-    //     break;
-    //   case "Spanish":
-    //     greeting = "Bienvenidos a TalkyTalk!";
-    //     break;
-    //   case "Korean":
-    //     greeting = "TalkyTalk에 오신 것을 환영합니다!";
-    //     break;
-    //   case "Japanese":
-    //     greeting = "TalkyTalkへようこそ!";
-    //     break;
-    //   case "Chinese":
-    //     greeting = "您好，欢迎来到TalkyTalk!";
-    //     break;
-    //   default:
-    //     greeting = "Welcome to TalkyTalk!";
-    // }
+    let joinMsg = chooseJoinMsg(user.room);
 
     // Welcome current user
     socket.emit("message", formatMessage(botName, greeting));
@@ -67,10 +41,7 @@ io.on("connection", (socket) => {
     // Broadcast when a user connects
     socket.broadcast
       .to(user.room)
-      .emit(
-        "message",
-        formatMessage(botName, `${user.username} has joined the chat`)
-      );
+      .emit("message", formatMessage(botName, `${user.username} ${joinMsg}`));
 
     // Send users and room info
     io.to(user.room).emit("roomUsers", {
@@ -89,11 +60,12 @@ io.on("connection", (socket) => {
   // Runs when client disconnects
   socket.on("disconnect", () => {
     const user = userLeave(socket.id);
+    let disconMsg = chooseDisconMsg(user.room);
 
     if (user) {
       io.to(user.room).emit(
         "message",
-        formatMessage(botName, `${user.username} has left the chat`)
+        formatMessage(botName, `${user.username} ${disconMsg}`)
       );
 
       // Send users and room info
@@ -101,6 +73,8 @@ io.on("connection", (socket) => {
         room: user.room,
         users: getRoomUsers(user.room),
       });
+
+      disconMsg = "";
     }
   });
 });
