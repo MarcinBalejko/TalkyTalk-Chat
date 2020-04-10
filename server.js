@@ -3,6 +3,7 @@ const http = require("http");
 const express = require("express");
 const socketio = require("socket.io");
 const formatMessage = require("./utils/messages");
+const chooseGreeting = require("./utils/notifications");
 const {
   userJoin,
   getCurrentUser,
@@ -26,8 +27,42 @@ io.on("connection", (socket) => {
 
     socket.join(user.room);
 
+    let greeting = chooseGreeting(user.room);
+
+    // switch (user.room) {
+    //   case "English":
+    //     greeting = "Welcome to TalkyTalk!";
+    //     break;
+    //   case "Polish":
+    //     greeting = "Witamy w TalkyTalk!";
+    //     break;
+    //   case "Russian":
+    //     greeting = "Добро пожаловать в TalkyTalk!";
+    //     break;
+    //   case "German":
+    //     greeting = "Willkommen bei TalkyTalk!";
+    //     break;
+    //   case "French":
+    //     greeting = "Bienvenue sur TalkyTalk!";
+    //     break;
+    //   case "Spanish":
+    //     greeting = "Bienvenidos a TalkyTalk!";
+    //     break;
+    //   case "Korean":
+    //     greeting = "TalkyTalk에 오신 것을 환영합니다!";
+    //     break;
+    //   case "Japanese":
+    //     greeting = "TalkyTalkへようこそ!";
+    //     break;
+    //   case "Chinese":
+    //     greeting = "您好，欢迎来到TalkyTalk!";
+    //     break;
+    //   default:
+    //     greeting = "Welcome to TalkyTalk!";
+    // }
+
     // Welcome current user
-    socket.emit("message", formatMessage(botName, "Welcome to TalkyTalk!"));
+    socket.emit("message", formatMessage(botName, greeting));
 
     // Broadcast when a user connects
     socket.broadcast
