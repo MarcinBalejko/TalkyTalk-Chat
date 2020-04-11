@@ -68,7 +68,7 @@ io.on("connection", (socket) => {
         formatMessage(botName, `${user.username} ${disconMsg}`)
       );
 
-      disconMsg = "";
+      disconMsg = chooseDisconMsg(user.room);
 
       // Send users and room info
       io.to(user.room).emit("roomUsers", {
