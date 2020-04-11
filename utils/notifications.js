@@ -59,7 +59,7 @@ function chooseJoinMsg(roomName) {
       joinMsg = "Bienvenidos a TalkyTalk!";
       break;
     case "Korean":
-      joinMsg = "TalkyTalk에 오신 것을 환영합니다!";
+      joinMsg = "님이 입장합니다";
       break;
     case "Japanese":
       joinMsg = "がチャットに参加しました!";
@@ -97,7 +97,7 @@ function chooseDisconMsg(roomName) {
       disconMsg = "ha abandonado el chat";
       break;
     case "Korean":
-      disconMsg = "has left the chat";
+      disconMsg = "님이 퇴장합니다";
       break;
     case "Japanese":
       disconMsg = "が退出しました";
