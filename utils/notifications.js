@@ -1,3 +1,4 @@
+// Greeting
 function chooseGreeting(roomName) {
   let greeting = "";
 
@@ -36,6 +37,7 @@ function chooseGreeting(roomName) {
   return greeting;
 }
 
+// User has joined the chat
 function chooseJoinMsg(roomName) {
   let joinMsg = "";
 
@@ -74,6 +76,7 @@ function chooseJoinMsg(roomName) {
   return joinMsg;
 }
 
+// User has left the chat
 function chooseDisconMsg(roomName) {
   let disconMsg = "";
 
