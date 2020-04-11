@@ -60,15 +60,13 @@ io.on("connection", (socket) => {
   // Runs when client disconnects
   socket.on("disconnect", () => {
     const user = userLeave(socket.id);
-    let disconMsg = chooseDisconMsg(user.room);
 
     if (user) {
+      let disconMsg = chooseDisconMsg(user.room);
       io.to(user.room).emit(
         "message",
         formatMessage(botName, `${user.username} ${disconMsg}`)
       );
-
-      disconMsg = chooseDisconMsg(user.room);
 
       // Send users and room info
       io.to(user.room).emit("roomUsers", {
