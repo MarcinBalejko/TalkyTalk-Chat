@@ -8,11 +8,6 @@ This app has been deployed to Heroku:
 
 https://talkytalk-chat.herokuapp.com/
 
--------
-
-**Description**
--------------------------------
-
 -----
 
 |   Description   |   Image    |
